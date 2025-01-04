@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# Company HR Chatbot
 
-First, run the development server:
+This project enables employees to ask questions about company policies, such as Vision, Mission, Values, Code of Conduct, Attendance policies, Leave management, and more. The chat interface delivers quick, reliable answers based on the company policy database, empowering employees with easy access to important HR information anytime.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Technologies Used
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Next.js**: A React framework for building server-rendered applications.
+- **Vercel AI SDK**: A tool for integrating AI-powered features into the application.
+- **Pinecone**: A vector database for storing and querying policy information for fast, relevant responses.
+- **OpenAI**: Provides natural language understanding and generation capabilities.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Employee-driven Q&A interface to retrieve company policy information.
+- Easy access to policies like Vision, Mission, Values, Attendance, Leave management, etc.
+- AI-powered responses to help employees understand company guidelines.
+- Integration with Pinecone for fast, reliable vector searches on the policy database.
 
-## Learn More
+## Setup
 
-To learn more about Next.js, take a look at the following resources:
+### Prerequisites
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Before you start, make sure you have the following installed:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- [Node.js](https://nodejs.org/) (version 16 or higher)
+- [Yarn](https://yarnpkg.com/) (optional, but recommended)
 
-## Deploy on Vercel
+### Installation
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Clone the repository:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   ```bash
+   git clone <repository-url>
+   cd <project-directory>
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env` file and add the following keys:
+
+   ```env
+   PINECONE_API_KEY=<your-pinecone-api-key>
+   PINECONE_INDEX_NAME=<your-pinecone-index-name>
+   OPENAI_API_KEY=<your-openai-api-key>
+   NEXT_PUBLIC_BASE_URL=http://localhost:3000
+   ```
+
+4. Run the application locally:
+
+   ```bash
+   npm run dev
+   ```
+
+   The app should now be running at `http://localhost:3000`.
+
+## Usage
+
+- After setting up the application, you can ask the chatbot about various company policies such as Vision, Mission, Values, Attendance, Leave management, and more.
+- The AI will retrieve relevant responses based on the policies stored in Pinecone, leveraging OpenAI's language capabilities for answering questions.
+
+## Deployment
+
+This application can be deployed to Vercel or any other platform of your choice. If you're using Vercel, simply push your code to GitHub and connect the repository to Vercel. The environment variables should be added to Vercel's project settings.
+
+## License
+
+This project is licensed under the MIT License.
+
+---
+
+Let me know if you need further modifications!
