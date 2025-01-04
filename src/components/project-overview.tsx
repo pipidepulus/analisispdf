@@ -14,7 +14,7 @@ const ProjectOverview = () => {
                 <p>
                     The{" "}
                     <Link
-                        href="https://sdk.vercel.ai/docs/reference/ai-sdk-ui/use-chat"
+                        href="https://github.com/akshays-repo/OptiKnow"
                         className="text-blue-500"
                     >
                         OptiKnow
