@@ -1,76 +1,69 @@
+# AI-Powered Document Query System
 
-# Company HR Chatbot
+This application allows users to upload PDFs, which are then processed, chunked, and stored in Pinecone for efficient retrieval using OpenAI embeddings. Users can query the stored data and receive AI-generated responses based on the most relevant document chunks.
 
-This project enables employees to ask questions about company policies, such as Vision, Mission, Values, Code of Conduct, Attendance policies, Leave management, and more. The chat interface delivers quick, reliable answers based on the company policy database, empowering employees with easy access to important HR information anytime.
+## 📌 Features
+- Upload PDFs via a Next.js portal.
+- Parse and extract text using `pdf2json`.
+- Chunk text with `chunkSize: 512` and `chunkOverlap: 64`.
+- Generate embeddings and store them in Pinecone.
+- Retrieve top results based on user queries.
+- Generate responses using OpenAI’s `gpt-4o-mini`.
 
-## Technologies Used
+## 📜 Workflow
 
-- **Next.js**: A React framework for building server-rendered applications.
-- **Vercel AI SDK**: A tool for integrating AI-powered features into the application.
-- **Pinecone**: A vector database for storing and querying policy information for fast, relevant responses.
-- **OpenAI**: Provides natural language understanding and generation capabilities.
+```mermaid
+flowchart TD
+    A[User Uploads PDF] -->|Next.js API| B[Parse PDF using pdf2json]
+    B --> C[Convert to Text]
+    C --> D[Chunk Text: chunkSize 512, chunkOverlap 64]
+    D --> E[Generate OpenAI Embeddings]
+    E --> F[Store in Pinecone: embedding, chunk, index, fileName]
+    
+    G[User Submits Query] --> H[Convert Query to Embedding]
+    H --> I[Retrieve Top 5 Results from Pinecone]
+    I --> J[Create Context for AI Response]
+    J --> K[Generate Streaming Response using gpt-4o-mini]
+    K --> L[Display Response to User]
+```
 
-## Features
+## 🛠 Technologies Used
+- **Next.js** - API and frontend
+- **pdf2json** - Parsing PDFs into text
+- **Pinecone** - Vector database for storing embeddings
+- **OpenAI Embeddings** - Transform text into vector representations
+- **GPT-4o-mini** - AI model for generating responses
 
-- Employee-driven Q&A interface to retrieve company policy information.
-- Easy access to policies like Vision, Mission, Values, Attendance, Leave management, etc.
-- AI-powered responses to help employees understand company guidelines.
-- Integration with Pinecone for fast, reliable vector searches on the policy database.
+## 🚀 Getting Started
+### 1️⃣ Clone the Repository
+```sh
+git clone https://github.com/your-repo/ai-document-query.git
+cd ai-document-query
+```
 
-## Setup
+### 2️⃣ Install Dependencies
+```sh
+npm install
+```
 
-### Prerequisites
+### 3️⃣ Run the Application
+```sh
+npm run dev
+```
 
-Before you start, make sure you have the following installed:
+## 📢 Usage
+1. Upload a PDF via the web portal.
+2. The system processes and stores chunks in Pinecone.
+3. Enter a query in the chat interface.
+4. AI retrieves relevant content and generates a response.
 
-- [Node.js](https://nodejs.org/) (version 16 or higher)
-- [Yarn](https://yarnpkg.com/) (optional, but recommended)
+## 🤝 Contributing
+Feel free to open issues and submit pull requests to enhance the system.
 
-### Installation
-
-1. Clone the repository:
-
-   ```bash
-   git clone <repository-url>
-   cd <project-directory>
-   ```
-
-2. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-
-3. Create a `.env` file and add the following keys:
-
-   ```env
-   PINECONE_API_KEY=<your-pinecone-api-key>
-   PINECONE_INDEX_NAME=<your-pinecone-index-name>
-   OPENAI_API_KEY=<your-openai-api-key>
-   NEXT_PUBLIC_BASE_URL=http://localhost:3000
-   ```
-
-4. Run the application locally:
-
-   ```bash
-   npm run dev
-   ```
-
-   The app should now be running at `http://localhost:3000`.
-
-## Usage
-
-- After setting up the application, you can ask the chatbot about various company policies such as Vision, Mission, Values, Attendance, Leave management, and more.
-- The AI will retrieve relevant responses based on the policies stored in Pinecone, leveraging OpenAI's language capabilities for answering questions.
-
-## Deployment
-
-This application can be deployed to Vercel or any other platform of your choice. If you're using Vercel, simply push your code to GitHub and connect the repository to Vercel. The environment variables should be added to Vercel's project settings.
-
-## License
-
-This project is licensed under the MIT License.
+## 📜 License
+MIT License
 
 ---
 
-Let me know if you need further modifications!
+This project helps organizations store and retrieve policy-related documents efficiently using AI-powered search!
+

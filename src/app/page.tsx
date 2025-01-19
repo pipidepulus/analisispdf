@@ -11,9 +11,11 @@ import ProjectOverview from "@/components/project-overview";
 import { LoadingIcon } from "@/components/icons";
 import { cn } from "@/utils/utils";
 import { toast } from "sonner";
+import { useLimitRestriction } from "@/utils/limt-restrcition-hook";
 
 export default function Chat() {
   const [toolCall, setToolCall] = useState<string>();
+  const { incrementTotalRequests, totalRequests } = useLimitRestriction();
   const { messages, input, handleInputChange, handleSubmit, isLoading } =
     useChat({
       maxSteps: 4,
@@ -60,6 +62,14 @@ export default function Chat() {
     .filter((m) => m.role !== "user")
     .slice(-1)[0];
 
+  const isRateLimited = totalRequests >= 5;
+
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    if (isRateLimited) return toast.error("You've been rate limited, please try again later!");
+    incrementTotalRequests();
+    handleSubmit(e);
+  }
+
   return (
     <div className="flex justify-center items-start sm:pt-16 min-h-screen w-full dark:bg-neutral-900 px-4 md:px-0 py-4">
       <div className="flex flex-col items-center w-full max-w-[500px]">
@@ -81,14 +91,15 @@ export default function Chat() {
           )}
         >
           <div className="flex flex-col w-full justify-between gap-2">
-            <form onSubmit={handleSubmit} className="flex space-x-2">
+            <form onSubmit={handleFormSubmit} className="flex space-x-2">
               <Input
                 className={`bg-neutral-100 text-base w-full text-neutral-700 dark:bg-neutral-700 dark:placeholder:text-neutral-400 dark:text-neutral-300`}
                 minLength={3}
                 required
                 value={input}
-                placeholder={"Ask me anything..."}
+                placeholder={isRateLimited ? "Your request is exceeded thanks for your patience." : "Ask anything..."}
                 onChange={handleInputChange}
+                disabled={isRateLimited}
               />
             </form>
             <motion.div
