@@ -37,7 +37,7 @@ flowchart TD
 ## 🚀 Getting Started
 ### 1️⃣ Clone the Repository
 ```sh
-git clone https://github.com/your-repo/ai-document-query.git
+git clone https://github.com/akshays-repo/ai-document-query.git
 cd ai-document-query
 ```
 
